@@ -1,0 +1,14 @@
+{
+  "name": "quoteswidget",
+  "version": "1.0.0",
+  "description": "Get Randoms Quotes From Open Source Random Sites,Display then Save For When No INternet IS available",
+  "main": "app.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Cahhvoy",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^8.1.1"
+  }
+}

@@ -1,0 +1,43 @@
+body{
+    width:100%;
+    margin: auto;
+    color: #000000;
+    background-color: #ffa500;
+}
+
+#body{
+    width:99.25%;
+    background-color: #ffff;
+    margin: 0.5px auto;
+    min-height: 81.5vh;
+    vertical-align: middle;
+}
+
+header{
+    border:none;
+    border-bottom:1px solid #008000;
+    width: 98%;
+ }
+
+#title{
+  display:block;
+
+}
+#title span{
+ color: #008000;
+ font-size: 20px;
+}
+#quoteTitle{
+  display:block;
+
+}
+#quoteTitle span{
+ color: #ffa500;
+}
+
+section#body{
+    background-color: brown;
+}
+section#footer{
+    background-color: chartreuse;
+}
