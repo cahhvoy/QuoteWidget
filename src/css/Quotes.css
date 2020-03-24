@@ -9,7 +9,7 @@ body{
     width:99.25%;
     background-color: #ffff;
     margin: 0.5px auto;
-    min-height: 81.5vh;
+    min-height: 60vh;
     vertical-align: middle;
 }
 
@@ -17,6 +17,7 @@ header{
     border:none;
     border-bottom:1px solid #008000;
     width: 98%;
+    margin: auto;
  }
 
 #title{
@@ -35,9 +36,45 @@ header{
  color: #ffa500;
 }
 
+#sections{
+    width: 98%;
+    margin: auto;
+}
 section#body{
-    background-color: brown;
+    /* background-color: brown; */
 }
 section#footer{
-    background-color: chartreuse;
+    /* background-color: chartreuse; */
 }
+
+#close,#close{
+    display:flex;
+    width: 98%;
+    margin: auto;
+    flex-direction: row-reverse;
+
+}
+
+#close div#closeBtn,#close div#minBtn{
+    width: 5%;
+    text-align: center;
+    float: right;
+    font-size: 30px;
+    line-height: 0.85;
+    font-weight: 800;
+    cursor: pointer;
+    color: #c1c1c1;    
+}
+#close div#closeBtn:hover,#close div#minBtn:hover{
+    color:#ffa500;  
+    /* font-size: 35px; */
+    /* transition:linear 0.52s;  */
+}
+ #close div#closeBtn:before{
+    content: "\00d7";
+    font-family: Arial, sans-serif;    
+  } 
+  #close div#minBtn:before{
+    content: "\002D";
+    font-family: Arial, sans-serif;    
+  } 
