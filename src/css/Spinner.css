@@ -1,0 +1,90 @@
+/*https://github.com/cahhvoy/HtmlCss-Loading-Animation*/
+
+
+.holder{
+    position: absolute;
+    top: 60%;
+    left:50%;
+    transform: translate(-50%,-50%)
+}
+.holder span{
+    width:20px;
+    height:20px;
+    border-radius: 50%;
+    display: inline-block;
+    margin:0 6px;
+}
+.dot1{
+    background-color: #4b4a4a;
+    animation:  dotKeyF1 1s infinite;
+}
+
+.dot2{
+    background-color: #ffa500;
+    animation:  dotKeyF2 1s infinite;
+}
+.dot3{
+    background-color: #066906;
+    animation: dotKeyF3 1s infinite;
+}
+.dot4{
+    background-color: #e70808;
+    animation:  dotKeyF4 1s infinite;
+}
+
+@keyframes dotKeyF1{
+    25%{
+        transform:scale(1.2); 
+    }
+    50%{
+        transform:scale(1); 
+    }
+    75%{
+        transform:scale(1); 
+    }
+    100%{
+        transform:scale(1); 
+    }
+}
+@keyframes dotKeyF2{
+    25%{
+        transform:scale(1); 
+    }
+    50%{
+        transform:scale(1.2); 
+    }
+    75%{
+        transform:scale(1);
+    }
+    100%{
+        transform:scale(1); 
+    }
+}
+@keyframes dotKeyF3{
+    25%{
+        transform:scale(1); 
+    }
+    50%{
+        transform:scale(1); 
+    }
+    75%{
+        transform:scale(1.5); 
+    }
+    100%{
+        transform:scale(1); 
+    }
+}
+@keyframes dotKeyF4{
+    25%{
+        transform:scale(1); 
+    }
+    50%{
+        transform:scale(1); 
+    }
+    75%{
+        transform:scale(1); 
+    }
+    100%{
+        transform:scale(1.8); 
+    }
+}
