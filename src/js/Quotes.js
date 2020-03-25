@@ -35,11 +35,10 @@ let perPage = 1;
 let page  = Math.floor(Math.random() * 1000)+1; // 1 to  1000
 //let quoteNum = Math.floor(Math.random() * 11)// 0 to  10
 
-var url = "https://quotesondesign.com/wp-json/wp/v2/posts/?orderby=rand&page="+0+"&per_page="+perPage+"";
+var url = "https://quotesondesign.com/wp-json/wp/v2/posts/?orderby=rand&page="+page+"&per_page="+perPage+"";
 
 request(url,(err,response,body)=>{
   if(err){
-      console.log( err)
       document.getElementById("quoteTitle").innerHTML ="<span id=\"errorT\">Error Occured</span>";
       let dataH  = document.getElementById("quoteText").innerHTML;
       document.getElementById("quoteText").innerHTML="<span id=\"error\">"+ err+"</span>"+dataH;
@@ -57,11 +56,14 @@ request(url,(err,response,body)=>{
         document.getElementById("quoteTitle").innerHTML = quoteTitle['rendered'];
         document.getElementById("quoteText").innerHTML = quoteContent['rendered'];
   }else if(response["statusCode"]==400){
-        document.getElementById("quoteTitle").innerHTML = "Error Occurred";
+        document.getElementById("quoteTitle").innerHTML = "<span id=\"errorT\">Error Occurred</span>";
         let dataH  = document.getElementById("quoteText").innerHTML;
-        dataH = dataH + bodyJson["message"];         
+        document.getElementById("quoteText").innerHTML="<span id=\"error\">"+bodyJson["message"] +"</span>"+dataH;        
   }else{
       //standard Error here
+      document.getElementById("quoteTitle").innerHTML ="<span id=\"errorT\">Error</span>";
+      let dataH  = document.getElementById("quoteText").innerHTML;
+      document.getElementById("quoteText").innerHTML="<span id=\"error\"> an unknown Error Occured </span>"+dataH;
   }
 
   //console.log(bodyJson)
