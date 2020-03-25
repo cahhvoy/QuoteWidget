@@ -29,23 +29,28 @@ document.addEventListener("keydown", event => {
 //         window.unmaximize();
 //     }
 // });
+///tring to solve the problem of the api random not woring
 
+let perPage=1;
+let page=Math.floor(Math.random() * 1000)+1; // 1 to  1000
 
-var url = "https://quotesondesign.com/wp-json/wp/v2/";
+var url = "https://quotesondesign.com/wp-json/wp/v2/posts/?orderby=rand&page="+page+"&per_page="+perPage+"";
+
 request(url,(err,response,body)=>{
   if(err){
       console.log("err"+ err)
   }
- let bodyJson = JSON.parse(body);
-//   let quoteId = bodyJson[0]['id'];
-//   let quoteGuid = bodyJson[0]['guid'];
-//   let quotesLug = bodyJson[0]['slug'];
-//   let quoteLink = bodyJson[0]['link'];
-//   let quoteTitle = bodyJson[0]["title"];
-//   let quoteContent = bodyJson[0]["content"];
+  
+  let bodyJson = JSON.parse(body);
+    //   let quoteId = bodyJson[0]['id'];
+    //   let quoteGuid = bodyJson[0]['guid'];
+    //   let quotesLug = bodyJson[0]['slug'];
+    //   let quoteLink = bodyJson[0]['link'];
+  let quoteTitle = bodyJson[0]["title"];
+  let quoteContent = bodyJson[0]["content"];
 
-//   document.getElementById("quoteTitle").innerHTML = quoteTitle['rendered'];
-//   document.getElementById("quoteText").innerHTML = quoteContent['rendered'];
+  document.getElementById("quoteTitle").innerHTML = quoteTitle['rendered'];
+  document.getElementById("quoteText").innerHTML = quoteContent['rendered'];
 
-  console.log(bodyJson)
+  //console.log(bodyJson)
 })
