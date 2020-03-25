@@ -15,7 +15,7 @@ function createWindow () {
         maxHeight:200, 
         backgroundColor:"#e3e1e0",
         //show:false,
-        //frame:false,
+        frame:false,
         //alwaysOnTop:true,
         movable:true,
         webPreferences: {
