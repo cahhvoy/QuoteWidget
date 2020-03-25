@@ -3,20 +3,38 @@ body{
     margin: auto;
     color: #000000;
     background-color: #ffa500;
+    background-color: #ff00c8;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+::-webkit-scrollbar {     
+    background-color: #fff;
+    width: 0.045910em;
+}
+
+::-webkit-scrollbar-thumb:window-inactive,
+::-webkit-scrollbar-thumb {
+    background:  #ff00c8
 }
 
 #body{
-    width:99.25%;
+    /* width:99.25%;
     background-color: #ffff;
     margin: 0.5px auto;
-    min-height: 81.5vh;
-    vertical-align: middle;
+    min-height: 68.5vh;
+    border-radius: 3px; */
+    width: 99.7325%;
+    background-color: #ffff;
+    margin: 0.5px auto;
+    min-height: 62.25vh;
+    border-radius: 3px;
 }
 
 header{
     border:none;
-    border-bottom:1px solid #008000;
+    border-bottom:1px solid #f1eded;
     width: 98%;
+    margin: auto;
+    padding-bottom: 5px;
  }
 
 #title{
@@ -29,15 +47,62 @@ header{
 }
 #quoteTitle{
   display:block;
-
+  color: #ffa500;
+  letter-spacing: 0.25px;
+  font-size: 25px;
 }
-#quoteTitle span{
- color: #ffa500;
-}
 
+
+#sections{
+    width: 98%;
+    margin: auto;
+}
 section#body{
-    background-color: brown;
+    color: #000000;
+    padding: 4px 2px;
+}
+#quoteText{
+    line-height: 1.25;
+    font-size: 16.4px;
+    letter-spacing: 0.75px;
+    font-family: Tahoma;
+    font-weight: normal;
 }
 section#footer{
-    background-color: chartreuse;
+    border-top:1px solid #e3e1e0;
+    /* background-color: chartreuse; */
 }
+
+#close,#close{
+    display:flex;
+    width: 98%;
+    margin: auto;
+    flex-direction: row-reverse;
+
+}
+
+#close div#closeBtn,#close div#minBtn{
+    width: 5%;
+    text-align: center;
+    float: right;
+    font-size: 30px;
+    line-height: 0.685;
+    font-weight: 500;
+    cursor: pointer;
+    color: #c1c1c1;    
+}
+#close div#closeBtn:hover,#close div#minBtn:hover{
+    color:#ffa500;  
+    background-color: #f3f3f3;
+    /* font-size: 35px; */
+    /* transition:linear 0.52s;  */
+}
+ #close div#closeBtn:before{
+    content: "\00d7";
+    font-family: Arial, sans-serif;   
+    vertical-align: middle; 
+  } 
+  #close div#minBtn:before{
+    content: "\002D";
+    font-family: Arial, sans-serif;    
+  } 
