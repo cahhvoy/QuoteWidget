@@ -5,7 +5,7 @@ var internetAvailable = require("internet-available");
 let isInternetAvailable = false;
 
 checkConnectivity=async ()=>{
-   await internetAvailable({
+    await internetAvailable({
        timeout: 5000,
        retries: 2
     }).then(() => {
@@ -37,13 +37,14 @@ document.addEventListener("keydown", event => {
 });
 
 document.getElementById("newQuotebtn").addEventListener('click',()=>{
-        //document.getElementById("newQuotebtn").en
-        
+           // document.getElementById("newQuotebtn").style.display="none";           
+
             document.getElementById("quoteTitle").innerHTML = "<span id=\"errorT\">Loading Quote</span>";
             let dataH  = document.getElementById("quoteText").innerHTML;
             document.getElementById("quoteText").innerHTM="";
             document.getElementById("quoteText").innerHTML="<span class=\"blur\">"+dataH+"</span><div class=\"holder\"><span class=\"dot1\"></span><span class=\"dot2\"></span><span class=\"dot3\"></span><span class=\"dot4\"></span></div>";  
         loadQuote();
+       // document.getElementById("newQuotebtn").style.display=""
         
 })
 
