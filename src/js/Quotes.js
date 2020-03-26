@@ -4,17 +4,18 @@ var internetAvailable = require("internet-available");
 
 let isInternetAvailable = false;
 
-checkConnectivity=async ()=>{
+checkConnectivity = async ()=>{
+    let net= false;
     await internetAvailable({
-       timeout: 3000,
+       timeout: 5000,
        retries: 2
-    }).then(() => {
-        return true;
-    }).catch((err) => {
-        return false;
-    });
+     }).then(() => {
+        net=true;
+    }).catch(() => {        
+        net=false;
+  });    
+  return net;
 }
-
 
 
 document.getElementById("closeBtn").addEventListener('click',()=>{
@@ -47,7 +48,6 @@ document.querySelector("button.newQuotebtn").addEventListener('click',()=>{
 })
 
 
-
 // document.getElementById("max-btn").addEventListener("click", function (e) {
 //     var window = remote.getCurrentWindow();
 //     if (!window.isMaximized()) {
@@ -59,12 +59,14 @@ document.querySelector("button.newQuotebtn").addEventListener('click',()=>{
 
 
 loadQuote = async ()=>{
-    isInternetAvailable = await  checkConnectivity();    
-    if(isInternetAvailable){      
-            let perPage = 1;
-            let page  = Math.floor(Math.random() * 1000)+1; // 1 to  1000
-            //let quoteNum = Math.floor(Math.random() * 11)// 0 to  10
+  
+    isInternetAvailable = await  checkConnectivity();   
+    
+    if(isInternetAvailable){
 
+            let perPage = 1;
+            let page  = Math.floor(Math.random() * 1000)+1;
+            
             var url = "https://quotesondesign.com/wp-json/wp/v2/posts/?orderby=rand&page="+page+"&per_page="+perPage+"";
 
             request(url,(err,response,body)=>{
@@ -82,7 +84,7 @@ loadQuote = async ()=>{
                     //   let quoteLink = bodyJson[0]['link'];
                     let quoteTitle = bodyJson[0]["title"];
                     let quoteContent = bodyJson[0]["content"];
-
+                    
                     document.getElementById("quoteTitle").innerHTML = quoteTitle['rendered'];
                     document.getElementById("quoteText").innerHTML="";
                     document.getElementById("quoteText").innerHTML = quoteContent['rendered'];
@@ -96,16 +98,14 @@ loadQuote = async ()=>{
                 document.getElementById("quoteTitle").innerHTML ="<span id=\"errorT\">Error</span>";
                 document.getElementById("quoteText").innerHTML="";
                 document.getElementById("quoteText").innerHTML="<span id=\"error\"> an unknown Error Occured </span>";
-            }        
+            } 
 
-   
        })
      }else{
         document.getElementById("quoteTitle").innerHTML = "<span id=\"errorT\">No Internet</span>";
         document.getElementById("quoteText").innerHTML="<span id=\"error\"> <span class=\"blur\">Connection Error</span> </span> <div class=\"holder\"><span class=\"dot1\"></span><span class=\"dot2\"></span><span class=\"dot3\"></span><span class=\"dot4\"></span></div>";  
     }
-    
-    document.getElementById("newQuotebtn").style.display=""
+  document.getElementById("newQuotebtn").style.display="";
 }
 
 loadQuote();
