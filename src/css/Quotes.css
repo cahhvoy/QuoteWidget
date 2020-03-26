@@ -79,21 +79,19 @@ section#body{
 }
 
 span#errorT{
-    color: #c1c1c1;
     font-size: 20px;
     text-transform: capitalize;
     letter-spacing: 1.5px;
 }
 
 span#error{
-    color: #ffa500;
+    color: #4b4a4a;
     text-align: center;
     display: block;
-    letter-spacing: 2.5px;
+    letter-spacing: 0.75px;
     text-transform: capitalize;
-    font-size: 14px;
-    border-bottom: 0.251px solid #e2e0e0;
-    padding: 15px 0;
+    font-size: 17px;
+    padding: 3px 0;
 }
 
 section#footer{

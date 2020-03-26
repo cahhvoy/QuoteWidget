@@ -6,7 +6,7 @@ let isInternetAvailable = false;
 
 checkConnectivity=async ()=>{
     await internetAvailable({
-       timeout: 5000,
+       timeout: 3000,
        retries: 2
     }).then(() => {
         return true;
@@ -36,15 +36,13 @@ document.addEventListener("keydown", event => {
          }
 });
 
-document.getElementById("newQuotebtn").addEventListener('click',()=>{
-           // document.getElementById("newQuotebtn").style.display="none";           
-
+document.querySelector("button.newQuotebtn").addEventListener('click',()=>{
+            document.getElementById("newQuotebtn").style.display="none";          
             document.getElementById("quoteTitle").innerHTML = "<span id=\"errorT\">Loading Quote</span>";
             let dataH  = document.getElementById("quoteText").innerHTML;
             document.getElementById("quoteText").innerHTM="";
             document.getElementById("quoteText").innerHTML="<span class=\"blur\">"+dataH+"</span><div class=\"holder\"><span class=\"dot1\"></span><span class=\"dot2\"></span><span class=\"dot3\"></span><span class=\"dot4\"></span></div>";  
-        loadQuote();
-       // document.getElementById("newQuotebtn").style.display=""
+        loadQuote();         
         
 })
 
@@ -60,10 +58,9 @@ document.getElementById("newQuotebtn").addEventListener('click',()=>{
 // });
 
 
-loadQuote= ()=>{
-    isInternetAvailable = checkConnectivity();
-    console.log(isInternetAvailable)
-    if(isInternetAvailable){
+loadQuote = async ()=>{
+    isInternetAvailable = await  checkConnectivity();    
+    if(isInternetAvailable){      
             let perPage = 1;
             let page  = Math.floor(Math.random() * 1000)+1; // 1 to  1000
             //let quoteNum = Math.floor(Math.random() * 11)// 0 to  10
@@ -73,8 +70,8 @@ loadQuote= ()=>{
             request(url,(err,response,body)=>{
             if(err){
                 document.getElementById("quoteTitle").innerHTML ="<span id=\"errorT\">Error Occured</span>";
-                let dataH  = document.getElementById("quoteText").innerHTML;
-                document.getElementById("quoteText").innerHTML="<span id=\"error\">"+ err+"</span>"+dataH;
+                document.getElementById("quoteText").innerHTML="";
+                document.getElementById("quoteText").innerHTML="<span id=\"error\">"+ err+"</span> <div class=\"holder\"><span class=\"dot1\"></span><span class=\"dot2\"></span><span class=\"dot3\"></span><span class=\"dot4\"></span></div>";
             }
             
             let bodyJson = JSON.parse(body);
@@ -87,24 +84,28 @@ loadQuote= ()=>{
                     let quoteContent = bodyJson[0]["content"];
 
                     document.getElementById("quoteTitle").innerHTML = quoteTitle['rendered'];
+                    document.getElementById("quoteText").innerHTML="";
                     document.getElementById("quoteText").innerHTML = quoteContent['rendered'];
             }else if(response["statusCode"]==400){
                     document.getElementById("quoteTitle").innerHTML = "<span id=\"errorT\">Error Occurred</span>";
                     let dataH  = document.getElementById("quoteText").innerHTML;
+                    document.getElementById("quoteText").innerHTML="";
                     document.getElementById("quoteText").innerHTML="<span id=\"error\">"+bodyJson["message"] +"</span>"+dataH;        
             }else{
                 //standard Error here
                 document.getElementById("quoteTitle").innerHTML ="<span id=\"errorT\">Error</span>";
-                let dataH  = document.getElementById("quoteText").innerHTML;
-                document.getElementById("quoteText").innerHTML="<span id=\"error\"> an unknown Error Occured </span>"+dataH;
+                document.getElementById("quoteText").innerHTML="";
+                document.getElementById("quoteText").innerHTML="<span id=\"error\"> an unknown Error Occured </span>";
             }        
 
    
        })
-    }else{
-        document.getElementById("quoteTitle").innerHTML = "No Internet";
-        document.getElementById("quoteText").innerHTML="<span class=\"blur\">Connection Error</span><div class=\"holder\"><span class=\"dot1\"></span><span class=\"dot2\"></span><span class=\"dot3\"></span><span class=\"dot4\"></span></div>";  
+     }else{
+        document.getElementById("quoteTitle").innerHTML = "<span id=\"errorT\">No Internet</span>";
+        document.getElementById("quoteText").innerHTML="<span id=\"error\"> <span class=\"blur\">Connection Error</span> </span> <div class=\"holder\"><span class=\"dot1\"></span><span class=\"dot2\"></span><span class=\"dot3\"></span><span class=\"dot4\"></span></div>";  
     }
+    
+    document.getElementById("newQuotebtn").style.display=""
 }
 
 loadQuote();
