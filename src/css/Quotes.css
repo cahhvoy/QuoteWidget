@@ -25,7 +25,7 @@ body{
     width: 99.7325%;
     background-color: #ffff;
     margin: 0.5px auto;
-    min-height: 62.25vh;
+    min-height: 45.25vh;
     border-radius: 3px;
 }
 
@@ -57,20 +57,90 @@ header{
     width: 98%;
     margin: auto;
 }
+
 section#body{
     color: #000000;
-    padding: 4px 2px;
+    padding: 0 2px;
 }
+
+#body .blur{
+    color: #c1c1c1;
+}
+
 #quoteText{
-    line-height: 1.25;
-    font-size: 16.4px;
-    letter-spacing: 0.75px;
-    font-family: Tahoma;
-    font-weight: normal;
+    line-height: 1.55;
+    font-size: 17.25px;
+    letter-spacing: 0.975px;
+    white-space: normal;
 }
+
+#quoteText p{
+ margin: 0;
+}
+
+span#errorT{
+    font-size: 20px;
+    text-transform: capitalize;
+    letter-spacing: 1.5px;
+}
+
+span#error{
+    color: #4b4a4a;
+    text-align: center;
+    display: block;
+    letter-spacing: 0.75px;
+    text-transform: capitalize;
+    font-size: 17px;
+    padding: 3px 0;
+}
+
 section#footer{
     border-top:1px solid #e3e1e0;
-    /* background-color: chartreuse; */
+    min-height: 21.0vh;
+}
+
+.footer{
+    width: 99%;
+    margin: 0 auto;
+    padding: 5px 0;
+}
+
+.newQuotebtn{
+    width: 5.65em;
+    height: 2.25em;
+    padding: 0px 1px;
+    border: 1px solid #ffffff;
+    background-color: #ffffff;
+    border-radius: 2px;
+    outline: none;
+    box-shadow: none;
+    -webkit-app-region: no-drag;
+}
+
+.newQuotebtn:hover{
+    border: 1px solid #e2e0e0;
+    background-color: #e2e0e0;
+}
+
+
+.newQuotebtn img.icon{
+    position: relative;
+    top: 3px;
+    left: 0px;
+    width: 17px;
+    height: 17px;
+    transition: all 0.4s ease-in-out;
+}
+.newQuotebtn span#text{
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    color: #ff00c8;
+    font-weight: 700;
+    line-height: 26px;
+}
+
+.newQuotebtn:hover .icon {
+    transform: rotate(360deg) scale(1.2);
 }
 
 #close,#close{
