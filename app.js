@@ -1,19 +1,27 @@
-const { app,Menu,BrowserWindow } = require('electron')
+const { app,Menu,MenuItem,BrowserWindow,screen,remote } = require('electron')
 const path = require('path');
 const url = require('url');
+ 
+
 
 let win;
 
 function createWindow () {
   // Create the browser window.
+  const { width, height } = screen.getPrimaryDisplay().workAreaSize;
+        let mainWidth=500;
+        let mainHeight= 200;
+        let widthPos = width-mainWidth-4;
    win = new BrowserWindow({
-        width: 500,
-        height: 200,               
-        minWidth:500,
-        minHeight:200,
+        width: mainWidth,
+        height: mainHeight,               
+        minWidth:mainWidth,
+        minHeight:mainHeight,
         maxWidth:500,
         maxHeight:200, 
         backgroundColor:"#e3e1e0",
+        x:widthPos,
+        y:4,
         //show:false,
         frame:false,
         //alwaysOnTop:true,
@@ -49,10 +57,37 @@ function createWindow () {
 // });
 
 app.on('ready',()=>{
-    createWindow()  
-});
-  
 
+  createWindow();
+
+  const contxtMenu = new Menu;
+  //contxtMenu.append(new MenuItem({role:''}))
+  contxtMenu.append(new MenuItem({role:'selectAll'}))
+  contxtMenu.append(new MenuItem({role:'copy'}))
+  contxtMenu.append(new MenuItem({type:'separator'}))
+  // contxtMenu.append(new MenuItem({
+    //has to use ipc 
+  //   label:"Next Quote",
+  //   click: ()=>{
+  //     //click refresh button 
+  //     //var window = win.BrowserWindow();
+  //     console.log(app)
+  //     //window.getElementById('newQuotebtn').click();
+  //   }}))
+  contxtMenu.append(new MenuItem({type:'separator'}))
+  contxtMenu.append(new MenuItem({
+    label:"settings",
+    click: ()=>{
+      //open setting menu 
+      console.log("settings")
+    }}))
+
+
+  win.webContents.on("context-menu",(e,params)=>{
+  contxtMenu.popup(win,params.x,params.y)
+  })
+
+});
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
       app.quit()

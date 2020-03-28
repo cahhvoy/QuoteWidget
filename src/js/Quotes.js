@@ -4,6 +4,10 @@ var internetAvailable = require("internet-available");
 
 let isInternetAvailable = false;
 
+var MainSetInt="";
+var ReloadSetInt="";
+var reloadInterval= 300000;
+
 checkConnectivity = async ()=>{
     let net= false;
     await internetAvailable({
@@ -43,7 +47,12 @@ document.querySelector("button.newQuotebtn").addEventListener('click',()=>{
             let dataH  = document.getElementById("quoteText").innerHTML;
             document.getElementById("quoteText").innerHTM="";
             document.getElementById("quoteText").innerHTML="<span class=\"blur\">"+dataH+"</span><div class=\"holder\"><span class=\"dot1\"></span><span class=\"dot2\"></span><span class=\"dot3\"></span><span class=\"dot4\"></span></div>";  
-        loadQuote();         
+            
+            if(MainSetInt!=""){                
+               clearInterval(MainSetInt);
+               MainSetInt="";
+            }        
+            loadQuote();    
         
 })
 
@@ -59,7 +68,11 @@ document.querySelector("button.newQuotebtn").addEventListener('click',()=>{
 
 
 loadQuote = async ()=>{
-  
+
+    if(ReloadSetInt==""){
+        clearInterval(ReloadSetInt);
+        ReloadSetInt="";
+    }
     isInternetAvailable = await  checkConnectivity();   
     
     if(isInternetAvailable){
@@ -101,11 +114,20 @@ loadQuote = async ()=>{
             } 
 
        })
+       document.getElementById("newQuotebtn").style.display="";
+       if(MainSetInt==""){
+            MainSetInt = setInterval(
+                loadQuote
+            ,reloadInterval);
+         }
      }else{
         document.getElementById("quoteTitle").innerHTML = "<span id=\"errorT\">No Internet</span>";
-        document.getElementById("quoteText").innerHTML="<span id=\"error\"> <span class=\"blur\">Connection Error</span> </span> <div class=\"holder\"><span class=\"dot1\"></span><span class=\"dot2\"></span><span class=\"dot3\"></span><span class=\"dot4\"></span></div>";  
-    }
-  document.getElementById("newQuotebtn").style.display="";
+        document.getElementById("quoteText").innerHTML="<span id=\"error\"> <span class=\"blur\">Connection Error <br><br> Retrying Every 5 Seconds</span> </span> <div class=\"holder\"><span class=\"dot1\"></span><span class=\"dot2\"></span><span class=\"dot3\"></span><span class=\"dot4\"></span></div>";  
+        //reloads every 5 seconds to check for internet
+        ReloadSetInt =  setInterval(
+            loadQuote
+         ,5000);
+    }  
 }
 
 loadQuote();
