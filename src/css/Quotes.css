@@ -8,7 +8,7 @@ body{
 }
 ::-webkit-scrollbar {     
     background-color: #fff;
-    width: 0.045910em;
+    width: 0.05910em;
 }
 
 ::-webkit-scrollbar-thumb:window-inactive,
@@ -99,7 +99,7 @@ section#footer{
     min-height: 21.0vh;
 }
 
-section#footer {
+section#footer,#body .blur {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;

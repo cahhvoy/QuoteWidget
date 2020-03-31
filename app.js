@@ -1,10 +1,12 @@
-const { app,Menu,MenuItem,BrowserWindow,screen,remote } = require('electron')
+const { app,Menu,MenuItem,BrowserWindow,screen,remote,Tray } = require('electron')
 const path = require('path');
 const url = require('url');
- 
+
+const appIcon = path.join(__dirname,'src/images/icon/iconSQ.jpg')
 
 
 let win;
+let trayIcon = null;
 
 function createWindow () {
   // Create the browser window.
@@ -48,7 +50,7 @@ function createWindow () {
     win = null
   })
     
-  win.webContents.openDevTools();
+  //win.webContents.openDevTools();
 }
 
 //app.whenReady().then(createWindow)
@@ -57,9 +59,8 @@ function createWindow () {
 // });
 
 app.on('ready',()=>{
-
   createWindow();
-
+  
   const contxtMenu = new Menu;
   //contxtMenu.append(new MenuItem({role:''}))
   contxtMenu.append(new MenuItem({role:'selectAll'}))
@@ -86,6 +87,33 @@ app.on('ready',()=>{
   win.webContents.on("context-menu",(e,params)=>{
   contxtMenu.popup(win,params.x,params.y)
   })
+  
+  trayIcon = new Tray(appIcon);
+  let trayTemplate  = [
+    {
+      label:'show',
+      click:()=>{
+        //check if visible before calling this 
+        win.show();
+      }
+    },
+    {
+      type:'separator'
+    },
+    {
+      label:'Quit',
+      click: ()=>{
+        app.isQuiting = true;
+        app.quit();
+      }
+    },
+  ]
+  const TrayCntxtMnu = Menu.buildFromTemplate(trayTemplate);
+  trayIcon.setContextMenu(TrayCntxtMnu);
+  trayIcon.setToolTip("Quotes Widget");
+  trayIcon.on('double-click',()=>{
+    win.show();
+  })
 
 });
 app.on('window-all-closed', () => {
@@ -99,5 +127,4 @@ app.on('activate', () => {
      createWindow()
   }
 })
-
 
