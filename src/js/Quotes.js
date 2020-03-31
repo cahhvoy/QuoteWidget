@@ -21,22 +21,22 @@ checkConnectivity = async ()=>{
   return net;
 }
 
-
 document.getElementById("closeBtn").addEventListener('click',()=>{
     var window = remote.getCurrentWindow();
-    window.close();
+    window.close(); // Quits the app completely 
+    //window.hide();// goes to tray app runs in the bg
 })
 
 document.getElementById("minBtn").addEventListener('click',()=>{
     var window = remote.getCurrentWindow();
-    window.minimize();
+    window.hide();// to tray
     // remote.getCurrentWindow().minimize();
 })
 
 document.addEventListener("keydown", event => {
     switch (event.key) {
         case "Escape":
-            remote.getCurrentWindow().minimize();
+            remote.getCurrentWindow().hide();
             break;
          }
 });
@@ -51,9 +51,8 @@ document.querySelector("button.newQuotebtn").addEventListener('click',()=>{
             if(MainSetInt!=""){                
                clearInterval(MainSetInt);
                MainSetInt="";
-            }        
-            loadQuote();    
-        
+            }
+            loadQuote();
 })
 
 
@@ -122,11 +121,11 @@ loadQuote = async ()=>{
          }
      }else{
         document.getElementById("quoteTitle").innerHTML = "<span id=\"errorT\">No Internet</span>";
-        document.getElementById("quoteText").innerHTML="<span id=\"error\"> <span class=\"blur\">Connection Error <br><br> Retrying Every 5 Seconds</span> </span> <div class=\"holder\"><span class=\"dot1\"></span><span class=\"dot2\"></span><span class=\"dot3\"></span><span class=\"dot4\"></span></div>";  
-        //reloads every 5 seconds to check for internet
+        document.getElementById("quoteText").innerHTML="<span id=\"error\"> <span class=\"blur\">Connection Error <br><br> Retrying Every 15 Minutes</span> </span> <div class=\"holder\"><span class=\"dot1\"></span><span class=\"dot2\"></span><span class=\"dot3\"></span><span class=\"dot4\"></span></div>";  
+        //reloads every 15 minutes seconds to check for internet
         ReloadSetInt =  setInterval(
             loadQuote
-         ,5000);
+         ,900000);
     }  
 }
 
