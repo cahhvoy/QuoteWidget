@@ -4,15 +4,19 @@
   "description": "Get Randoms Quotes From Open Source Random Sites,Display then Save For When No INternet IS available",
   "main": "app.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "rebuild": "electron-rebuild -f -w sqlite3"
   },
   "author": "Cahhvoy",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^8.1.1"
+    "electron": "^8.1.1",
+    "electron-rebuild": "^1.10.1"
   },
   "dependencies": {
     "internet-available": "^1.0.0",
-    "request": "^2.88.2"
+    "knex": "^0.20.13",
+    "request": "^2.88.2",
+    "sqlite3": "^4.1.1"
   }
 }
