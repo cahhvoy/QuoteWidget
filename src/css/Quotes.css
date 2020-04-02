@@ -206,3 +206,9 @@ section#footer,#body .blur {
     content: "\002D";
     font-family: Arial, sans-serif;    
   } 
+
+  .errorTT {
+    color: #ccc;
+    float: right;
+    line-height:2;
+  }
