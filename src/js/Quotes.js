@@ -47,10 +47,18 @@ isQuoteSaved = async(Quote)=>{
     return saved;
 }
 
-readQuote = ()=>{
+readRandomQuote = async()=>{
 // get only one random quote
-//knexConn.select('quoteAuthor','quoteBody').from('Quotes')
+ var randRow='null';
+   await knexConn.select('quoteAuthor as author','quoteBody as body').from('Quotes').orderByRaw('RANDOM()').limit(1)
+    .then((res)=>{
+     // console.log(res[0].quoteAuthor)
+        randRow = res[0] 
+      //randRow = res['PromiseValue']; 
+    })
+   return randRow;
 }
+
 
 readAllQuote = ()=>{
 //retun all rowns // limit included
@@ -147,13 +155,13 @@ loadQuote = async ()=>{
             
             var url = "https://quotesondesign.com/wp-json/wp/v2/posts/?orderby=rand&page="+page+"&per_page="+perPage+"";
             
-            var url2="https://quotes.rest/quote/random?language=en&limit=1"
-            request(url2,(err,response,body)=>{
-                console.log(JSON.stringify(err))
-                console.log(JSON.stringify(response))
-                console.log(JSON.stringify(body))
+            // var url2="https://quotes.rest/quote/random?language=en&limit=1"
+            // request(url2,(err,response,body)=>{
+            //     console.log(JSON.stringify(err))
+            //     console.log(JSON.stringify(response))
+            //     console.log(JSON.stringify(body))
 
-            })
+            // })
             request(url,async(err,response,body)=>{
             if(err){
                 document.getElementById("quoteTitle").innerHTML ="<span id=\"errorT\">Error Occured</span>";
@@ -206,8 +214,14 @@ loadQuote = async ()=>{
             ,reloadInterval);
          }
      }else{
-        document.getElementById("quoteTitle").innerHTML = "<span id=\"errorT\">No Internet</span>";
-        document.getElementById("quoteText").innerHTML="<span id=\"error\"> <span class=\"blur\">Connection Error <br><br> Retrying Every 15 Minutes</span> </span> <div class=\"holder\"><span class=\"dot1\"></span><span class=\"dot2\"></span><span class=\"dot3\"></span><span class=\"dot4\"></span></div>";  
+         //read a Quote From the database 
+        document.getElementById("quoteText").innerHTML="";        
+        var RandQuote = await readRandomQuote();
+        document.getElementById("quoteTitle").innerHTML = RandQuote['author']!=""?RandQuote['author']+"<span class=\"errorTT\" id=\"errorT\">No Internet</span>" : "<span id=\"errorT\">No Internet</span>";
+        document.getElementById("quoteText").innerHTML= RandQuote['author']!=""?RandQuote['body'] : "<span id=\"error\"> <span class=\"blur\">Connection Error <br><br> Retrying Every 15 Minutes</span> </span> <div class=\"holder\"><span class=\"dot1\"></span><span class=\"dot2\"></span><span class=\"dot3\"></span><span class=\"dot4\"></span></div>";  
+        document.getElementById("newQuotebtn").style.display="";
+        totalSaved = await totalSavedQuotes();        
+        document.getElementById("totSavedA").innerHTML = totalSaved
         //reloads every 15 minutes seconds to check for internet
         ReloadSetInt =  setInterval(
             loadQuote
