@@ -112,6 +112,26 @@ section#footer,#body .blur {
     width: 99%;
     margin: 0 auto;
     padding: 5px 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+#totSaved{
+    display: flex;
+    margin-left: auto;
+    justify-content: end;
+    align-self: center;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* #totSavedQ{
+
+} */
+#totSavedA{
+    color: #ff00c8;
+    font-size: 17px;
 }
 
 .newQuotebtn{

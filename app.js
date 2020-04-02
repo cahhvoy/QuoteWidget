@@ -24,7 +24,7 @@ function createWindow () {
         backgroundColor:"#e3e1e0",
         x:widthPos,
         y:4,
-        //show:false,
+        show:false,
         frame:false,
         //alwaysOnTop:true,
         movable:true,
@@ -43,14 +43,14 @@ function createWindow () {
 //     win.show();
 // });
   
-// win.once('ready-to-show', () => {
-//     win.show()
-//   })
+win.once('ready-to-show', () => {
+    win.show()
+  })
   win.on('closed', () => {
     win = null
   })
     
-  //win.webContents.openDevTools();
+  win.webContents.openDevTools();
 }
 
 //app.whenReady().then(createWindow)
@@ -114,12 +114,13 @@ app.on('ready',()=>{
   trayIcon.on('double-click',()=>{
     win.show();
   })
-
+ 
 });
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
       app.quit()
   }
+  trayIcon.destroy();
 })
 
 app.on('activate', () => {
